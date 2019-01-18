@@ -38,7 +38,7 @@ Demonstrate your understanding of this week's concepts by answering the followin
    A foreign key.
 
 1. What do we need in order to have a _many to many_ relationship between two tables.
-   We need an intermediary table to go between the two.
+   We need an intermediary join table to go between the two.
 
 ## Project Set Up
 
