@@ -11,6 +11,7 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   const action = req.body;
+
   try {
     const numberAdded = await addAction(action);
     if (numberAdded === 0) {
@@ -25,6 +26,7 @@ router.post("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
+
   try {
     const action = await getAction(id);
     if (!action) {

@@ -1,6 +1,4 @@
-// const express = require("express");
 const knex = require("knex");
-
 const knexConfig = require("../knexfile");
 const db = knex(knexConfig.development);
 
@@ -31,9 +29,11 @@ const getAction = id => {
 
   return Promise.all([action, context]).then(results => {
     let [action, context] = results;
+
     if (results[0] === undefined) {
       return null;
     }
+
     action.completed === 0 ? (action.completed = false) : (action.completed = true);
     let result = { ...action, context: context };
     return result;

@@ -1,6 +1,4 @@
-// const express = require("express");
 const knex = require("knex");
-
 const knexConfig = require("../knexfile");
 const db = knex(knexConfig.development);
 
@@ -8,10 +6,12 @@ const getProject = id => {
   const project = db("projects")
     .where({ id })
     .first();
+
   const actions = db("actions").where({ project_id: id });
 
   return Promise.all([project, actions]).then(results => {
     let [project, actions] = results;
+
     if (results[0] === undefined) {
       return null;
     }

@@ -11,6 +11,7 @@ const router = express.Router();
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
+
   try {
     const project = await getProject(id);
     if (!project) {
@@ -49,6 +50,7 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const update = req.body;
+
   try {
     const numberUpdated = await updateProject(id, update);
     if (numberUpdated !== 0) {
@@ -63,6 +65,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
+
   try {
     const numberDeleted = await deleteProject(id);
     if (numberDeleted !== 0) {
