@@ -26,7 +26,6 @@ router.get("/:id", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const projects = await getProjects();
-    console.log(projects);
     res.status(200).json(projects);
   } catch (err) {
     res.status(500).json(err);

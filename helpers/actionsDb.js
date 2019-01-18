@@ -21,15 +21,21 @@ const getActions = () => {
 };
 
 const getAction = id => {
-  const action = db("actions").where({ id });
+  const action = db("actions")
+    .where({ id })
+    .first();
+  const context = db("action_context as ac")
+    .join("context as c", "ac.context_id", "c.id")
+    .where({ "ac.action_id": id })
+    .select("c.id as id", "c.name as Context");
 
-  return Promise.all([action]).then(results => {
-    let [action] = results[0];
-    if (results[0].length === 0) {
+  return Promise.all([action, context]).then(results => {
+    let [action, context] = results;
+    if (results[0] === undefined) {
       return null;
     }
     action.completed === 0 ? (action.completed = false) : (action.completed = true);
-    let result = { ...action };
+    let result = { ...action, context: context };
     return result;
   });
 };

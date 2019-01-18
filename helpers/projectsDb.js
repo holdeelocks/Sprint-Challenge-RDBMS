@@ -9,6 +9,7 @@ const getProject = id => {
     .where({ id })
     .first();
   const actions = db("actions").where({ project_id: id });
+
   return Promise.all([project, actions]).then(results => {
     let [project, actions] = results;
     if (results[0] === undefined) {
