@@ -1,11 +1,17 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable("actions", function(tbl) {
     tbl.increments();
-    tbl.string("description").notNullable();
-    tbl.string("notes").notNullable();
+    tbl.string("description", 256).notNullable();
+    tbl.string("notes", 256).notNullable();
     tbl
-      .boolean("project_completed")
-      .references("completed")
+      .boolean("completed")
+      .defaultTo(false)
+      .notNullable();
+    tbl
+      .integer("project_id")
+      .notNullable()
+      .unsigned()
+      .references("id")
       .inTable("projects");
   });
 };
